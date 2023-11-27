@@ -11,7 +11,10 @@
     "storybook:build": "storybook build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["game", "idle"],
+  "keywords": [
+    "game",
+    "idle"
+  ],
   "author": {
     "name": "Akimov Ivan",
     "email": "b@rubble.com"
@@ -24,6 +27,10 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "@chakra-ui/react": "^1.8.9",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "framer-motion": "^6.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -31,6 +38,7 @@
     "@babel/preset-env": "^7.23.3",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@chakra-ui/storybook-addon": "^1.0.3",
     "@storybook/addon-essentials": "^7.5.3",
     "@storybook/addon-interactions": "^7.5.3",
     "@storybook/addon-links": "^7.5.3",
