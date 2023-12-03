@@ -4,7 +4,7 @@ import { Button } from './Button';
 // Подробнее о том, как создавать истории: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof Button> = {
   // Расположение и заголовок страницы в сайдбаре
-  title: 'Example/Button',
+  title: 'Components/Button',
   // Описываемый компонент
   component: Button,
   // Параметры страницы
