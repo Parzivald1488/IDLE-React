@@ -1,13 +1,14 @@
 import { Progress } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import style from './Progressbar.module.css'
+import classNames from 'classnames';
 
 
 interface Props {
     /**
      * Цвет прогресс бара
     */
-    colorScheme?: string,
+    colorScheme?: "blue" | "whiteAlpha" | "blackAlpha" | "gray" | "red" | "orange" | "yellow",
     /**
      * Градиент прогресс бара
     */
@@ -27,7 +28,7 @@ interface Props {
     /**
      * Размер прогресс бара
     */
-    size?: 'sm' | 'md' | 'lg';
+    size?: 'xs' | 'sm' | 'md' | 'lg',
     /**
      * Значение прогресс бара
      */
@@ -35,41 +36,35 @@ interface Props {
     /**
      * Выравнивание текста
     */
-    alignText?: 'left' | 'right' | 'center';
+    alignText?: 'left' | 'right' | 'center',
     /**
      * Положение текста относительно прогресс бара
     */
-    positionText?: 'top' | 'bottom' | 'hidden';
+    positionText?: 'top' | 'bottom';
     /**
      * Подпись прогресс бара
     */
-    text?: string;
+    text?: string,
 }
 
 /**
- * Компонент параграфа
- */
+ * Компонент прогресс-бара
+*/
 export const Progressbar = (props: Props) => {
-    const { colorScheme = "blue", hasStripe=false, isAnimated=false, max=100, min=0, size='sm', value=50, alignText="center", text="text", positionText="hidden"} = props;
-    let progressClass = ''
+    const { colorScheme = "blue", hasStripe=false, isAnimated=false, max=100, min=0, size='sm', value, alignText="center", text, positionText="top" } = props;
     let hidden = ''
     
-    switch(positionText){
-        case 'top':
-            progressClass = style.progressBar;
-            break;
-        case 'bottom':
-            progressClass = style.progressBar + " " + style.reverse;
-            break;
-        case 'hidden' :
-            hidden = style.hidden;
-            break;
-    }
+    let progressClass = classNames(style.progressBar, {
+        [style.reverse]: positionText === 'bottom'
+    })
 
+    
     return (
         <div className={progressClass}>  
-            <Text className={hidden} align={alignText}>{text}</Text>
-            <Progress className={style.bar} size={size} colorScheme={colorScheme} hasStripe={hasStripe}  isAnimated={isAnimated} max={max} min={min} value={value}/>
+            {text ? (
+                <Text fontSize={size} className={hidden} align={alignText}>{text}</Text>
+            ) : null}
+            <Progress className={style.bar} size={size} colorScheme={colorScheme} hasStripe={hasStripe} isAnimated={isAnimated} max={max} min={min} value={value}/>
         </div>
     );
 };
