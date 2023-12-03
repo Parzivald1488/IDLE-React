@@ -4,7 +4,7 @@ import {Paragraph} from "./Paragraph";
 // Подробнее о том, как создавать истории: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof Paragraph> = {
     // Расположение и заголовок страницы в сайдбаре
-    title: 'Example/Paragraph',
+    title: 'Components/Paragraph',
     // Описываемый компонент
     component: Paragraph,
     // Параметры страницы

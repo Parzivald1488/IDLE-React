@@ -1,0 +1,15 @@
+.progressBar { 
+    min-width: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.bar { 
+    min-width: 100px;
+}
+
+.reverse {
+    flex-direction: column-reverse;
+}
