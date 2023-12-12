@@ -48,7 +48,7 @@ export const Progressbar = (props: Props) => {
         <div className={progressClass}>  
             {text ? (
                 <Text fontSize={size} align={alignText}>{text}</Text>
-            ) : null}
+                ) : null}
             <Progress className={style.bar} size={size} colorScheme={colorScheme} hasStripe={hasStripe} isAnimated={isAnimated} max={max} min={min} value={value}/>
         </div>
     );
