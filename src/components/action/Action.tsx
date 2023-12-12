@@ -12,6 +12,9 @@ interface Props {
     borderRadius : "none" | "sm" | "base" | "md" | "lg" | "2xl" | "3xl" | "full",
 
     /** Назваение действия */
+    badgeColor : "red" | "green" | "gray" | "yellow" | "brown",
+
+    /** Назваение действия */
     actionName : string,
 
     /** Название результата действия */
@@ -42,15 +45,15 @@ export type ActionProps = Props;
 
 /** Компонент действия */
 export const Action = (props: Props) => {
-    const {color, borderRadius,  actionName='Добыть :', resultName='Рунная эссенция', typeResult='Эссенция', cosumableList, resultList, actionProgress, masteryProgress, image='https://i.ytimg.com/vi/8yiYboYs-wk/hqdefault.jpg' } = props;
+    const {color, borderRadius, badgeColor, actionName='Добыть :', resultName='Рунная эссенция', typeResult='Эссенция', cosumableList, resultList, actionProgress, masteryProgress, image='https://i.ytimg.com/vi/8yiYboYs-wk/hqdefault.jpg' } = props;
 
 
     return (
         <Box width={'sm'} height={'sm'} backgroundColor="#232a35" display="flex"  alignItems="center" flexDirection={"column"} borderTop={'4px'} borderTopColor={color} borderRadius={borderRadius}>
-            <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+            <Box display={'flex'} flexDirection={'column'} alignItems={'center'} paddingTop='20px' fontSize='12px' fontWeight='600'>
                 <Text>{actionName}</Text>
                 <Text>{resultName}</Text>
-                <Badge borderRadius='base'>{typeResult}</Badge>
+                <Badge colorScheme={badgeColor} borderRadius='base' fontSize='12px'>{typeResult}</Badge>
             </Box>
 
             <Box display='flex' flexDirection='row'>
