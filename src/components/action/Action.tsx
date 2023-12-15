@@ -1,115 +1,85 @@
-import { Progress, Text, Box, Image, Badge } from '@chakra-ui/react'
-import style from './Action.module.scss'
-import classNames from "classnames";
+import { Text, Box, Image, Badge } from '@chakra-ui/react'
 import { Progressbar } from '../Progressbar/Progressbar';
 import { BadgeComp } from '../badge/Badge';
+import {GiTrophyCup} from "react-icons/gi";
+import {ReactNode} from "react";
+
+
+type Resources = {
+    color: "red" | "green" | "gray" | "blue" | "brown"
+    image?: ReactNode
+    text: string
+}
 
 interface Props {
-    /** Цвет верхней границы действия */
-    color : "red" | "green" | "gray" | "yellow" | "brown",
-
-    /** Радиус границ действия */
-    borderRadius : "none" | "sm" | "base" | "md" | "lg" | "2xl" | "3xl" | "full",
-
-    /** Назваение действия */
-    badgeColor : "red" | "green" | "gray" | "yellow" | "brown",
-
-    /** Назваение действия */
-    actionName : string,
-
-    /** Название результата действия */
-    resultName : string,
-
-    /** Название типа результата действия */
-    typeResult : string,
-
-    /** Список расходников */
-    cosumableList : string,
-
-    /** Список результатов */
-    resultList : string,
-
-    /** Шкалу прогресса действия */
-    actionProgress : string,
-
-    /** Шкалу мастерства действия */
-    masteryProgress : string,
-
-    /** Изображение */
-    image?: string,
-
-   
+    title: string;
+    description: string;
+    badge?: ReactNode;
+    image: ReactNode;
+    resources?: ReactNode[]
+    actionValue?: number;
+    masteryValue?: number;
+    masteryLevel?: number;
+    masteryMax?: number;
 }
 
 export type ActionProps = Props;
 
 /** Компонент действия */
 export const Action = (props: Props) => {
-    const {color, borderRadius, badgeColor, actionName='Добыть :', resultName='Рунная эссенция', typeResult='Эссенция', cosumableList, resultList, actionProgress, masteryProgress, image='https://i.ytimg.com/vi/8yiYboYs-wk/hqdefault.jpg' } = props;
+    const {
+        title,
+        description,
+        badge,
+        image,
+        resources = [],
+        actionValue = 0,
+        masteryValue = 0,
+        masteryLevel = 1,
+        masteryMax = 0,
+    } = props;
 
 
     return (
-        <Box width={'sm'} height={'sm'} backgroundColor="#232a35" display="flex"  alignItems="center" flexDirection={"column"} borderTop={'4px'} borderTopColor={color} borderRadius={borderRadius}>
-            <Box display={'flex'} flexDirection={'column'} alignItems={'center'} paddingTop='20px' fontSize='12px' fontWeight='600'>
-                <Text>{actionName}</Text>
-                <Text>{resultName}</Text>
-                <Badge colorScheme={badgeColor} borderRadius='base' fontSize='12px'>{typeResult}</Badge>
+        <Box flexGrow={1} display="flex" alignItems="center" flexDirection={"column"} borderRadius={'4px'} borderWidth={'4px'} padding='20px' gap={'15px'}>
+            <Box display={'flex'} flexDirection={'column'} alignItems={'center'} fontSize='12px' fontWeight='600'>
+                <Text>{title}:</Text>
+                <Text>{description}</Text>
+                {badge}
             </Box>
 
-            <Box display='flex' flexDirection='row'>
-                <BadgeComp
-                    color="gray"
-                    image="https://i.ytimg.com/vi/8yiYboYs-wk/hqdefault.jpg"
-                    text="5"
-                />
-                <BadgeComp
-                    color="gray"
-                    image="https://i.ytimg.com/vi/8yiYboYs-wk/hqdefault.jpg"
-                    text="1"
-                />
-                <BadgeComp
-                    color="gray"
-                    image="https://i.ytimg.com/vi/8yiYboYs-wk/hqdefault.jpg"
-                    text="0"
-                />
-                <BadgeComp
-                    color="blue"
-                    image="https://i.ytimg.com/vi/8yiYboYs-wk/hqdefault.jpg"
-                    text="3.00 сек."
-                />
+            <Box display='flex' flexDirection='row' gap={'5px'}>
+                {resources}
             </Box>
 
             <Box margin='8px'>
-                <Image height={'64px'} width={'64px'} src={image}/>
+                {image}
             </Box>
-            <Box width='100%' height='100%' display='flex' flexDirection='column' justifyContent='space-between' padding='20px' paddingTop='0px'>
 
-                <Box borderRadius='base'>
+            <Box width={'100%'} borderRadius='base'>
+                <Progressbar
+                    alignText="center"
+                    positionText="top"
+                    colorScheme="blue"
+                    size="lg"
+                    value={actionValue}
+                />
+            </Box>
+
+            <Box width={'100%'} display='flex' flexDirection='row'>
+                <Box display='flex' flexDirection='row' margin='4px'>
+                    <GiTrophyCup size={20} />
+                    <Text marginRight='4px'>{masteryLevel}</Text>
+                </Box>
+                <Box width='100%' borderRadius='base'>
                     <Progressbar
                         alignText="center"
                         positionText="top"
                         colorScheme="blue"
-                        size="lg"
-                        text="6/6"
-                        value={100}
+                        size="sm"
+                        text={`${masteryValue}/${masteryMax}`}
+                        value={masteryValue}
                     />
-                </Box>
-            
-                <Box display='flex' flexDirection='row'>
-                    <Box display='flex' flexDirection='row' margin='4px'>
-                        <Image height='20px' width='20px' src={image} marginRight='8px'/>
-                        <Text marginRight='4px'>5</Text>
-                    </Box>
-                    <Box width='100%' borderRadius='base'>
-                        <Progressbar
-                            alignText="center"
-                            positionText="top"
-                            colorScheme="blue"
-                            size="sm"
-                            text="1/86"
-                            value={100}
-                        />
-                    </Box>
                 </Box>
             </Box>
             
